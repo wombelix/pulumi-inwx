@@ -1,0 +1,30 @@
+{
+    "name": "@pulumi/inwx",
+    "version": "${VERSION}",
+    "description": "A Pulumi package for creating and managing inwx domain and dns resources.",
+    "keywords": [
+        "pulumi",
+        "inwx",
+        "category/infrastructure"
+    ],
+    "homepage": "https://dominik.wombacher.cc",
+    "repository": "https://github.com/wombelix/pulumi-inwx",
+    "license": "Apache-2.0",
+    "scripts": {
+        "build": "tsc",
+        "install": "node scripts/install-pulumi-plugin.js resource inwx ${VERSION}"
+    },
+    "dependencies": {
+        "@pulumi/pulumi": "^3.0.0"
+    },
+    "devDependencies": {
+        "@types/mime": "^2.0.0",
+        "@types/node": "^10.0.0",
+        "typescript": "^4.3.5"
+    },
+    "pulumi": {
+        "resource": true,
+        "name": "inwx",
+        "server": "https://github.com/wombelix/pulumi-inwx/releases"
+    }
+}

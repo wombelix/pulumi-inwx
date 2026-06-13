@@ -1,0 +1,779 @@
+{
+    "name": "inwx",
+    "displayName": "INWX",
+    "description": "A Pulumi package for creating and managing inwx domain and dns resources.",
+    "keywords": [
+        "pulumi",
+        "inwx",
+        "category/infrastructure"
+    ],
+    "homepage": "https://dominik.wombacher.cc",
+    "license": "Apache-2.0",
+    "attribution": "This Pulumi package is based on the [`inwx` Terraform Provider](https://github.com/inwx/terraform-provider-inwx).",
+    "repository": "https://github.com/wombelix/pulumi-inwx",
+    "pluginDownloadURL": "https://github.com/wombelix/pulumi-inwx/releases",
+    "publisher": "Dominik Wombacher",
+    "meta": {
+        "moduleFormat": "(.*)(?:/[^/]*)"
+    },
+    "language": {
+        "csharp": {
+            "packageReferences": {
+                "Pulumi": "3.*"
+            },
+            "compatibility": "tfbridge20"
+        },
+        "go": {
+            "importBasePath": "github.com/wombelix/pulumi-inwx/sdk/go/inwx",
+            "generateResourceContainerTypes": true,
+            "generateExtraInputTypes": true
+        },
+        "nodejs": {
+            "packageName": "@wombelix/pulumi-inwx",
+            "packageDescription": "A Pulumi package for creating and managing inwx domain and dns resources.",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/inwx/terraform-provider-inwx)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-inwx` repo](https://github.com/wombelix/pulumi-inwx/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-inwx` repo](https://github.com/inwx/terraform-provider-inwx/issues).",
+            "dependencies": {
+                "@pulumi/pulumi": "^3.0.0"
+            },
+            "devDependencies": {
+                "@types/mime": "^2.0.0",
+                "@types/node": "^10.0.0"
+            },
+            "compatibility": "tfbridge20",
+            "disableUnionOutputTypes": true
+        },
+        "python": {
+            "requires": {
+                "pulumi": "\u003e=3.0.0,\u003c4.0.0"
+            },
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/inwx/terraform-provider-inwx)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-inwx` repo](https://github.com/wombelix/pulumi-inwx/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-inwx` repo](https://github.com/inwx/terraform-provider-inwx/issues).",
+            "compatibility": "tfbridge20",
+            "pyproject": {}
+        }
+    },
+    "config": {
+        "variables": {
+            "apiUrl": {
+                "type": "string",
+                "description": "URL of the RPC API endpoint. Use `https://api.domrobot.com/jsonrpc/` for production and\n`https://api.ote.domrobot.com/jsonrpc/` for tests\n"
+            },
+            "password": {
+                "type": "string",
+                "description": "Login password of the api\n",
+                "secret": true
+            },
+            "tan": {
+                "type": "string",
+                "description": "Mobile-TAN to unlock account\n",
+                "secret": true
+            },
+            "username": {
+                "type": "string",
+                "description": "Login username of the api\n",
+                "secret": true
+            }
+        },
+        "defaults": [
+            "password",
+            "username"
+        ]
+    },
+    "types": {
+        "inwx:index/DomainContacts:DomainContacts": {
+            "properties": {
+                "admin": {
+                    "type": "integer",
+                    "description": "Id of the admin contact\n"
+                },
+                "billing": {
+                    "type": "integer",
+                    "description": "Id of the billing contact\n"
+                },
+                "registrant": {
+                    "type": "integer",
+                    "description": "Id of the registrant contact\n"
+                },
+                "tech": {
+                    "type": "integer",
+                    "description": "Id of the tech contact\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "admin",
+                "billing",
+                "registrant",
+                "tech"
+            ]
+        }
+    },
+    "provider": {
+        "description": "The provider type for the inwx package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
+        "properties": {
+            "apiUrl": {
+                "type": "string",
+                "description": "URL of the RPC API endpoint. Use `https://api.domrobot.com/jsonrpc/` for production and\n`https://api.ote.domrobot.com/jsonrpc/` for tests\n"
+            },
+            "password": {
+                "type": "string",
+                "description": "Login password of the api\n",
+                "secret": true
+            },
+            "tan": {
+                "type": "string",
+                "description": "Mobile-TAN to unlock account\n",
+                "secret": true
+            },
+            "username": {
+                "type": "string",
+                "description": "Login username of the api\n",
+                "secret": true
+            }
+        },
+        "required": [
+            "password",
+            "username"
+        ],
+        "inputProperties": {
+            "apiUrl": {
+                "type": "string",
+                "description": "URL of the RPC API endpoint. Use `https://api.domrobot.com/jsonrpc/` for production and\n`https://api.ote.domrobot.com/jsonrpc/` for tests\n"
+            },
+            "password": {
+                "type": "string",
+                "description": "Login password of the api\n",
+                "secret": true
+            },
+            "tan": {
+                "type": "string",
+                "description": "Mobile-TAN to unlock account\n",
+                "secret": true
+            },
+            "username": {
+                "type": "string",
+                "description": "Login username of the api\n",
+                "secret": true
+            }
+        },
+        "requiredInputs": [
+            "password",
+            "username"
+        ]
+    },
+    "resources": {
+        "inwx:index/dnssecKey:DnssecKey": {
+            "description": "## # Resource: inwx.DnssecKey\n\nProvides a INWX DNSSEC key resource\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as inwx from \"@wombelix/pulumi-inwx\";\n\nconst exampleCom = new inwx.DnssecKey(\"exampleCom\", {\n    algorithm: \"SHA256\",\n    domain: \"example.com\",\n    publicKey: \"ac12c2...\",\n});\n```\n```python\nimport pulumi\nimport pulumi_inwx as inwx\n\nexample_com = inwx.DnssecKey(\"exampleCom\",\n    algorithm=\"SHA256\",\n    domain=\"example.com\",\n    public_key=\"ac12c2...\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Inwx = Pulumi.Inwx;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var exampleCom = new Inwx.DnssecKey(\"exampleCom\", new()\n    {\n        Algorithm = \"SHA256\",\n        Domain = \"example.com\",\n        PublicKey = \"ac12c2...\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/wombelix/pulumi-inwx/sdk/go/inwx\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := inwx.NewDnssecKey(ctx, \"exampleCom\", \u0026inwx.DnssecKeyArgs{\n\t\t\tAlgorithm: pulumi.Int(\"SHA256\"),\n\t\t\tDomain:    pulumi.String(\"example.com\"),\n\t\t\tPublicKey: pulumi.String(\"ac12c2...\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.inwx.DnssecKey;\nimport com.pulumi.inwx.DnssecKeyArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var exampleCom = new DnssecKey(\"exampleCom\", DnssecKeyArgs.builder()        \n            .algorithm(\"SHA256\")\n            .domain(\"example.com\")\n            .publicKey(\"ac12c2...\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  exampleCom:\n    type: inwx:DnssecKey\n    properties:\n      algorithm: SHA256\n      domain: example.com\n      publicKey: ac12c2...\n```\n{{% /example %}}\n{{% /examples %}}\n## Caveats\n\n### Nameservers\n\nCan not be used in conjunction with INWX nameservers.\n\n\n## Import\n\nINWX DNSSEC keys can be imported using the domain name and digest e.g.,\n\n```sh\n $ pulumi import inwx:index/dnssecKey:DnssecKey example_com example.com/4E1243BD22C66E76C2BA9EDDC1F91394E57F9F83\n```\n\n ",
+            "properties": {
+                "algorithm": {
+                    "type": "integer",
+                    "description": "Algorithm used for the public key\n"
+                },
+                "digest": {
+                    "type": "string",
+                    "description": "Computed digest for the public key\n"
+                },
+                "digestType": {
+                    "type": "integer",
+                    "description": "Digest type\n"
+                },
+                "domain": {
+                    "type": "string",
+                    "description": "Name of the domain\n"
+                },
+                "flag": {
+                    "type": "integer",
+                    "description": "Key flag (256=ZSK, 257=KSK)\n"
+                },
+                "keyTag": {
+                    "type": "integer",
+                    "description": "Key tag\n"
+                },
+                "publicKey": {
+                    "type": "string",
+                    "description": "Public key of the domain\n"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "DNSSEC status\n"
+                }
+            },
+            "required": [
+                "algorithm",
+                "digest",
+                "digestType",
+                "domain",
+                "flag",
+                "keyTag",
+                "publicKey",
+                "status"
+            ],
+            "inputProperties": {
+                "algorithm": {
+                    "type": "integer",
+                    "description": "Algorithm used for the public key\n",
+                    "willReplaceOnChanges": true
+                },
+                "domain": {
+                    "type": "string",
+                    "description": "Name of the domain\n",
+                    "willReplaceOnChanges": true
+                },
+                "publicKey": {
+                    "type": "string",
+                    "description": "Public key of the domain\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "algorithm",
+                "domain",
+                "publicKey"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering DnssecKey resources.\n",
+                "properties": {
+                    "algorithm": {
+                        "type": "integer",
+                        "description": "Algorithm used for the public key\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "digest": {
+                        "type": "string",
+                        "description": "Computed digest for the public key\n"
+                    },
+                    "digestType": {
+                        "type": "integer",
+                        "description": "Digest type\n"
+                    },
+                    "domain": {
+                        "type": "string",
+                        "description": "Name of the domain\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "flag": {
+                        "type": "integer",
+                        "description": "Key flag (256=ZSK, 257=KSK)\n"
+                    },
+                    "keyTag": {
+                        "type": "integer",
+                        "description": "Key tag\n"
+                    },
+                    "publicKey": {
+                        "type": "string",
+                        "description": "Public key of the domain\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "DNSSEC status\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "inwx:index/domain:Domain": {
+            "description": "\n\n\n## Import\n\nINWX Domains can be imported using the domain name, e.g.,\n\n```sh\n $ pulumi import inwx:index/domain:Domain example_com \"example.com\"\n```\n\n ",
+            "properties": {
+                "contacts": {
+                    "$ref": "#/types/inwx:index/DomainContacts:DomainContacts",
+                    "description": "Contacts of the domain\n"
+                },
+                "extraData": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Extra data, needed for some jurisdictions. Valid extra data types: https://www.inwx.de/en/help/apidoc/f/ch03.html#type.extdata\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the domain\n"
+                },
+                "nameservers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Set of nameservers of the domain. Min Items: 1\n"
+                },
+                "period": {
+                    "type": "string",
+                    "description": "Registration period of the domain. Valid types: https://www.inwx.de/en/help/apidoc/f/ch03.html#type.period\n"
+                },
+                "renewalMode": {
+                    "type": "string",
+                    "description": "Renewal mode of the domain. One of: `AUTORENEW`, `AUTODELETE`, `AUTOEXPIRE`. Default: `AUTORENEW`\n"
+                },
+                "transferLock": {
+                    "type": "boolean",
+                    "description": "Whether the domain transfer lock should be enabled. Default: `true`\n"
+                }
+            },
+            "required": [
+                "contacts",
+                "name",
+                "period"
+            ],
+            "inputProperties": {
+                "contacts": {
+                    "$ref": "#/types/inwx:index/DomainContacts:DomainContacts",
+                    "description": "Contacts of the domain\n"
+                },
+                "extraData": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Extra data, needed for some jurisdictions. Valid extra data types: https://www.inwx.de/en/help/apidoc/f/ch03.html#type.extdata\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the domain\n"
+                },
+                "nameservers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Set of nameservers of the domain. Min Items: 1\n"
+                },
+                "period": {
+                    "type": "string",
+                    "description": "Registration period of the domain. Valid types: https://www.inwx.de/en/help/apidoc/f/ch03.html#type.period\n"
+                },
+                "renewalMode": {
+                    "type": "string",
+                    "description": "Renewal mode of the domain. One of: `AUTORENEW`, `AUTODELETE`, `AUTOEXPIRE`. Default: `AUTORENEW`\n"
+                },
+                "transferLock": {
+                    "type": "boolean",
+                    "description": "Whether the domain transfer lock should be enabled. Default: `true`\n"
+                }
+            },
+            "requiredInputs": [
+                "contacts",
+                "period"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Domain resources.\n",
+                "properties": {
+                    "contacts": {
+                        "$ref": "#/types/inwx:index/DomainContacts:DomainContacts",
+                        "description": "Contacts of the domain\n"
+                    },
+                    "extraData": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "description": "Extra data, needed for some jurisdictions. Valid extra data types: https://www.inwx.de/en/help/apidoc/f/ch03.html#type.extdata\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the domain\n"
+                    },
+                    "nameservers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Set of nameservers of the domain. Min Items: 1\n"
+                    },
+                    "period": {
+                        "type": "string",
+                        "description": "Registration period of the domain. Valid types: https://www.inwx.de/en/help/apidoc/f/ch03.html#type.period\n"
+                    },
+                    "renewalMode": {
+                        "type": "string",
+                        "description": "Renewal mode of the domain. One of: `AUTORENEW`, `AUTODELETE`, `AUTOEXPIRE`. Default: `AUTORENEW`\n"
+                    },
+                    "transferLock": {
+                        "type": "boolean",
+                        "description": "Whether the domain transfer lock should be enabled. Default: `true`\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "inwx:index/domainContact:DomainContact": {
+            "description": "## # Resource: inwx.DomainContact\n\nProvides a INWX domain contact resource\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as inwx from \"@wombelix/pulumi-inwx\";\n\nconst examplePerson = new inwx.DomainContact(\"examplePerson\", {\n    city: \"Example City\",\n    countryCode: \"EX\",\n    email: \"person@example.invalid\",\n    phoneNumber: \"+00.00000000000\",\n    postalCode: \"0\",\n    stateProvince: \"Example State\",\n    streetAddress: \"Example Street 0\",\n    type: \"PERSON\",\n});\n```\n```python\nimport pulumi\nimport pulumi_inwx as inwx\n\nexample_person = inwx.DomainContact(\"examplePerson\",\n    city=\"Example City\",\n    country_code=\"EX\",\n    email=\"person@example.invalid\",\n    phone_number=\"+00.00000000000\",\n    postal_code=\"0\",\n    state_province=\"Example State\",\n    street_address=\"Example Street 0\",\n    type=\"PERSON\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Inwx = Pulumi.Inwx;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var examplePerson = new Inwx.DomainContact(\"examplePerson\", new()\n    {\n        City = \"Example City\",\n        CountryCode = \"EX\",\n        Email = \"person@example.invalid\",\n        PhoneNumber = \"+00.00000000000\",\n        PostalCode = \"0\",\n        StateProvince = \"Example State\",\n        StreetAddress = \"Example Street 0\",\n        Type = \"PERSON\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/wombelix/pulumi-inwx/sdk/go/inwx\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := inwx.NewDomainContact(ctx, \"examplePerson\", \u0026inwx.DomainContactArgs{\n\t\t\tCity:          pulumi.String(\"Example City\"),\n\t\t\tCountryCode:   pulumi.String(\"EX\"),\n\t\t\tEmail:         pulumi.String(\"person@example.invalid\"),\n\t\t\tPhoneNumber:   pulumi.String(\"+00.00000000000\"),\n\t\t\tPostalCode:    pulumi.String(\"0\"),\n\t\t\tStateProvince: pulumi.String(\"Example State\"),\n\t\t\tStreetAddress: pulumi.String(\"Example Street 0\"),\n\t\t\tType:          pulumi.String(\"PERSON\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.inwx.DomainContact;\nimport com.pulumi.inwx.DomainContactArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var examplePerson = new DomainContact(\"examplePerson\", DomainContactArgs.builder()        \n            .city(\"Example City\")\n            .countryCode(\"EX\")\n            .email(\"person@example.invalid\")\n            .phoneNumber(\"+00.00000000000\")\n            .postalCode(0)\n            .stateProvince(\"Example State\")\n            .streetAddress(\"Example Street 0\")\n            .type(\"PERSON\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  examplePerson:\n    type: inwx:DomainContact\n    properties:\n      city: Example City\n      countryCode: EX\n      email: person@example.invalid\n      phoneNumber: '+00.00000000000'\n      postalCode: 0\n      stateProvince: Example State\n      streetAddress: Example Street 0\n      type: PERSON\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nINWX domain contacts can be imported using the `id`, e.g.,\n\n```sh\n $ pulumi import inwx:index/domainContact:DomainContact inwx_domain_contact 2147483647\n```\n\n ",
+            "properties": {
+                "city": {
+                    "type": "string",
+                    "description": "City of the contact\n"
+                },
+                "countryCode": {
+                    "type": "string",
+                    "description": "Country code of the contact. Must be two characters\n"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "Contact email address\n"
+                },
+                "fax": {
+                    "type": "string",
+                    "description": "Fax number of the contact\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "First and lastname of the contact\n"
+                },
+                "organization": {
+                    "type": "string",
+                    "description": "The legal name of the organization. Required for types other than person\n"
+                },
+                "phoneNumber": {
+                    "type": "string",
+                    "description": "Phone number of the contact\n"
+                },
+                "postalCode": {
+                    "type": "string",
+                    "description": "Postal Code/Zipcode of the contact\n"
+                },
+                "remarks": {
+                    "type": "string",
+                    "description": "Custom description of the contact\n"
+                },
+                "stateProvince": {
+                    "type": "string",
+                    "description": "State/Province name of the contact\n"
+                },
+                "streetAddress": {
+                    "type": "string",
+                    "description": "Street Address of the contact\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Type of contact. One of: `ORG`, `PERSON`, `ROLE`\n"
+                },
+                "whoisProtection": {
+                    "type": "boolean",
+                    "description": "Whether whois protection for the contact should be enabled. Depends on the registry supporting it. Not the same as whois protection for a domain\n"
+                }
+            },
+            "required": [
+                "city",
+                "countryCode",
+                "email",
+                "name",
+                "phoneNumber",
+                "postalCode",
+                "streetAddress",
+                "type"
+            ],
+            "inputProperties": {
+                "city": {
+                    "type": "string",
+                    "description": "City of the contact\n"
+                },
+                "countryCode": {
+                    "type": "string",
+                    "description": "Country code of the contact. Must be two characters\n"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "Contact email address\n"
+                },
+                "fax": {
+                    "type": "string",
+                    "description": "Fax number of the contact\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "First and lastname of the contact\n"
+                },
+                "organization": {
+                    "type": "string",
+                    "description": "The legal name of the organization. Required for types other than person\n"
+                },
+                "phoneNumber": {
+                    "type": "string",
+                    "description": "Phone number of the contact\n"
+                },
+                "postalCode": {
+                    "type": "string",
+                    "description": "Postal Code/Zipcode of the contact\n"
+                },
+                "remarks": {
+                    "type": "string",
+                    "description": "Custom description of the contact\n"
+                },
+                "stateProvince": {
+                    "type": "string",
+                    "description": "State/Province name of the contact\n"
+                },
+                "streetAddress": {
+                    "type": "string",
+                    "description": "Street Address of the contact\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Type of contact. One of: `ORG`, `PERSON`, `ROLE`\n"
+                },
+                "whoisProtection": {
+                    "type": "boolean",
+                    "description": "Whether whois protection for the contact should be enabled. Depends on the registry supporting it. Not the same as whois protection for a domain\n"
+                }
+            },
+            "requiredInputs": [
+                "city",
+                "countryCode",
+                "email",
+                "phoneNumber",
+                "postalCode",
+                "streetAddress",
+                "type"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering DomainContact resources.\n",
+                "properties": {
+                    "city": {
+                        "type": "string",
+                        "description": "City of the contact\n"
+                    },
+                    "countryCode": {
+                        "type": "string",
+                        "description": "Country code of the contact. Must be two characters\n"
+                    },
+                    "email": {
+                        "type": "string",
+                        "description": "Contact email address\n"
+                    },
+                    "fax": {
+                        "type": "string",
+                        "description": "Fax number of the contact\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "First and lastname of the contact\n"
+                    },
+                    "organization": {
+                        "type": "string",
+                        "description": "The legal name of the organization. Required for types other than person\n"
+                    },
+                    "phoneNumber": {
+                        "type": "string",
+                        "description": "Phone number of the contact\n"
+                    },
+                    "postalCode": {
+                        "type": "string",
+                        "description": "Postal Code/Zipcode of the contact\n"
+                    },
+                    "remarks": {
+                        "type": "string",
+                        "description": "Custom description of the contact\n"
+                    },
+                    "stateProvince": {
+                        "type": "string",
+                        "description": "State/Province name of the contact\n"
+                    },
+                    "streetAddress": {
+                        "type": "string",
+                        "description": "Street Address of the contact\n"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "Type of contact. One of: `ORG`, `PERSON`, `ROLE`\n"
+                    },
+                    "whoisProtection": {
+                        "type": "boolean",
+                        "description": "Whether whois protection for the contact should be enabled. Depends on the registry supporting it. Not the same as whois protection for a domain\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "inwx:index/nameserverRecord:NameserverRecord": {
+            "description": "## # Resource: inwx.NameserverRecord\n\nProvides a INWX nameserver record resource\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as inwx from \"@wombelix/pulumi-inwx\";\n\nconst exampleComTxt1 = new inwx.NameserverRecord(\"exampleComTxt1\", {\n    content: \"DNS records with terraform\",\n    domain: \"example.com\",\n    type: \"TXT\",\n});\n```\n```python\nimport pulumi\nimport pulumi_inwx as inwx\n\nexample_com_txt1 = inwx.NameserverRecord(\"exampleComTxt1\",\n    content=\"DNS records with terraform\",\n    domain=\"example.com\",\n    type=\"TXT\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Inwx = Pulumi.Inwx;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var exampleComTxt1 = new Inwx.NameserverRecord(\"exampleComTxt1\", new()\n    {\n        Content = \"DNS records with terraform\",\n        Domain = \"example.com\",\n        Type = \"TXT\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n\t\"github.com/wombelix/pulumi-inwx/sdk/go/inwx\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := inwx.NewNameserverRecord(ctx, \"exampleComTxt1\", \u0026inwx.NameserverRecordArgs{\n\t\t\tContent: pulumi.String(\"DNS records with terraform\"),\n\t\t\tDomain:  pulumi.String(\"example.com\"),\n\t\t\tType:    pulumi.String(\"TXT\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.inwx.NameserverRecord;\nimport com.pulumi.inwx.NameserverRecordArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var exampleComTxt1 = new NameserverRecord(\"exampleComTxt1\", NameserverRecordArgs.builder()        \n            .content(\"DNS records with terraform\")\n            .domain(\"example.com\")\n            .type(\"TXT\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  exampleComTxt1:\n    type: inwx:NameserverRecord\n    properties:\n      content: DNS records with terraform\n      domain: example.com\n      type: TXT\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nINWX nameserver records can be imported using the `id`, e.g.,\n\n```sh\n $ pulumi import inwx:index/nameserverRecord:NameserverRecord inwx_nameserver_record example.com:2147483647\n```\n\n ",
+            "properties": {
+                "content": {
+                    "type": "string",
+                    "description": "Content of the nameserver record\n"
+                },
+                "domain": {
+                    "type": "string",
+                    "description": "Name of the domain\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the nameserver record\n"
+                },
+                "prio": {
+                    "type": "integer",
+                    "description": "Priority of the nameserver record. Default: `0`\n"
+                },
+                "roId": {
+                    "type": "integer",
+                    "description": "DNS domain id\n"
+                },
+                "testing": {
+                    "type": "boolean",
+                    "description": "Execute command in testing mode. Default: `false`\n"
+                },
+                "ttl": {
+                    "type": "integer",
+                    "description": "TTL (time to live) of the nameserver record. Default: `3600`\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Type of the nameserver record. One of: `A`, `AAAA`, `AFSDB`, `ALIAS`, `CAA`, `CERT`, `CNAME`, \n`HINFO`, `KEY`, `LOC`, `MX`, `NAPTR`, `NS`, `OPENPGPKEY`, `PTR`, `RP`, `SMIMEA`, `SOA`, `SRV`, `SSHFP`, `TLSA`, `TXT`,\n`URI`, `URL`\n"
+                },
+                "urlAppend": {
+                    "type": "boolean",
+                    "description": "Append the path for redirection. Default: `false`\n"
+                },
+                "urlRedirectDescription": {
+                    "type": "string",
+                    "description": "Description of the frame redirection\n"
+                },
+                "urlRedirectFavIcon": {
+                    "type": "string",
+                    "description": "FavIcon of the frame redirection\n"
+                },
+                "urlRedirectKeywords": {
+                    "type": "string",
+                    "description": "Keywords of the frame redirection\n"
+                },
+                "urlRedirectTitle": {
+                    "type": "string",
+                    "description": "Title of the frame redirection\n"
+                },
+                "urlRedirectType": {
+                    "type": "string",
+                    "description": "Type of the url redirection. One of: `HEADER301`, `HEADER302`, `FRAME`\n"
+                }
+            },
+            "required": [
+                "content",
+                "domain",
+                "name",
+                "type"
+            ],
+            "inputProperties": {
+                "content": {
+                    "type": "string",
+                    "description": "Content of the nameserver record\n"
+                },
+                "domain": {
+                    "type": "string",
+                    "description": "Name of the domain\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the nameserver record\n"
+                },
+                "prio": {
+                    "type": "integer",
+                    "description": "Priority of the nameserver record. Default: `0`\n"
+                },
+                "roId": {
+                    "type": "integer",
+                    "description": "DNS domain id\n"
+                },
+                "testing": {
+                    "type": "boolean",
+                    "description": "Execute command in testing mode. Default: `false`\n"
+                },
+                "ttl": {
+                    "type": "integer",
+                    "description": "TTL (time to live) of the nameserver record. Default: `3600`\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Type of the nameserver record. One of: `A`, `AAAA`, `AFSDB`, `ALIAS`, `CAA`, `CERT`, `CNAME`, \n`HINFO`, `KEY`, `LOC`, `MX`, `NAPTR`, `NS`, `OPENPGPKEY`, `PTR`, `RP`, `SMIMEA`, `SOA`, `SRV`, `SSHFP`, `TLSA`, `TXT`,\n`URI`, `URL`\n"
+                },
+                "urlAppend": {
+                    "type": "boolean",
+                    "description": "Append the path for redirection. Default: `false`\n"
+                },
+                "urlRedirectDescription": {
+                    "type": "string",
+                    "description": "Description of the frame redirection\n"
+                },
+                "urlRedirectFavIcon": {
+                    "type": "string",
+                    "description": "FavIcon of the frame redirection\n"
+                },
+                "urlRedirectKeywords": {
+                    "type": "string",
+                    "description": "Keywords of the frame redirection\n"
+                },
+                "urlRedirectTitle": {
+                    "type": "string",
+                    "description": "Title of the frame redirection\n"
+                },
+                "urlRedirectType": {
+                    "type": "string",
+                    "description": "Type of the url redirection. One of: `HEADER301`, `HEADER302`, `FRAME`\n"
+                }
+            },
+            "requiredInputs": [
+                "content",
+                "domain",
+                "type"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering NameserverRecord resources.\n",
+                "properties": {
+                    "content": {
+                        "type": "string",
+                        "description": "Content of the nameserver record\n"
+                    },
+                    "domain": {
+                        "type": "string",
+                        "description": "Name of the domain\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the nameserver record\n"
+                    },
+                    "prio": {
+                        "type": "integer",
+                        "description": "Priority of the nameserver record. Default: `0`\n"
+                    },
+                    "roId": {
+                        "type": "integer",
+                        "description": "DNS domain id\n"
+                    },
+                    "testing": {
+                        "type": "boolean",
+                        "description": "Execute command in testing mode. Default: `false`\n"
+                    },
+                    "ttl": {
+                        "type": "integer",
+                        "description": "TTL (time to live) of the nameserver record. Default: `3600`\n"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "Type of the nameserver record. One of: `A`, `AAAA`, `AFSDB`, `ALIAS`, `CAA`, `CERT`, `CNAME`, \n`HINFO`, `KEY`, `LOC`, `MX`, `NAPTR`, `NS`, `OPENPGPKEY`, `PTR`, `RP`, `SMIMEA`, `SOA`, `SRV`, `SSHFP`, `TLSA`, `TXT`,\n`URI`, `URL`\n"
+                    },
+                    "urlAppend": {
+                        "type": "boolean",
+                        "description": "Append the path for redirection. Default: `false`\n"
+                    },
+                    "urlRedirectDescription": {
+                        "type": "string",
+                        "description": "Description of the frame redirection\n"
+                    },
+                    "urlRedirectFavIcon": {
+                        "type": "string",
+                        "description": "FavIcon of the frame redirection\n"
+                    },
+                    "urlRedirectKeywords": {
+                        "type": "string",
+                        "description": "Keywords of the frame redirection\n"
+                    },
+                    "urlRedirectTitle": {
+                        "type": "string",
+                        "description": "Title of the frame redirection\n"
+                    },
+                    "urlRedirectType": {
+                        "type": "string",
+                        "description": "Type of the url redirection. One of: `HEADER301`, `HEADER302`, `FRAME`\n"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}

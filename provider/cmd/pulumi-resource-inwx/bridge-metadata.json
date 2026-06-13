@@ -1,0 +1,69 @@
+{
+    "auto-aliasing": {
+        "resources": {
+            "inwx_dnssec_key": {
+                "current": "inwx:index/dnssecKey:DnssecKey"
+            },
+            "inwx_domain": {
+                "current": "inwx:index/domain:Domain",
+                "fields": {
+                    "contacts": {
+                        "maxItemsOne": true
+                    },
+                    "nameservers": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "inwx_domain_contact": {
+                "current": "inwx:index/domainContact:DomainContact"
+            },
+            "inwx_nameserver_record": {
+                "current": "inwx:index/nameserverRecord:NameserverRecord"
+            }
+        }
+    },
+    "renames": {
+        "resources": {
+            "inwx:index/dnssecKey:DnssecKey": "inwx_dnssec_key",
+            "inwx:index/domain:Domain": "inwx_domain",
+            "inwx:index/domainContact:DomainContact": "inwx_domain_contact",
+            "inwx:index/nameserverRecord:NameserverRecord": "inwx_nameserver_record"
+        },
+        "renamedProperties": {
+            "inwx:index/dnssecKey:DnssecKey": {
+                "digestType": "digest_type",
+                "keyTag": "key_tag",
+                "publicKey": "public_key"
+            },
+            "inwx:index/domain:Domain": {
+                "extraData": "extra_data",
+                "renewalMode": "renewal_mode",
+                "transferLock": "transfer_lock"
+            },
+            "inwx:index/domainContact:DomainContact": {
+                "countryCode": "country_code",
+                "phoneNumber": "phone_number",
+                "postalCode": "postal_code",
+                "stateProvince": "state_province",
+                "streetAddress": "street_address",
+                "whoisProtection": "whois_protection"
+            },
+            "inwx:index/nameserverRecord:NameserverRecord": {
+                "roId": "ro_id",
+                "urlAppend": "url_append",
+                "urlRedirectDescription": "url_redirect_description",
+                "urlRedirectFavIcon": "url_redirect_fav_icon",
+                "urlRedirectKeywords": "url_redirect_keywords",
+                "urlRedirectTitle": "url_redirect_title",
+                "urlRedirectType": "url_redirect_type"
+            },
+            "inwx:index:Provider": {
+                "apiUrl": "api_url"
+            }
+        },
+        "renamedConfigProperties": {
+            "apiUrl": "api_url"
+        }
+    }
+}
